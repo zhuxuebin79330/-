@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+//直接左子树加右子树加根节点输出 ,利用递归
+string pos(string pre,string vin){
+    string res="";
+    if(pre.size()==0)return res;
+    char temp=pre[0];
+    int root_num=0;
+    for(int i=0;i<vin.size();i++){
+        if(pre[0]==vin[i]){
+            root_num=i;
+            break;
+        }
+    }
+    string preleft(pre.begin()+1,pre.begin()+1+root_num);
+    string preright(pre.begin()+1+root_num,pre.end());
+    string vinleft(vin.begin(),vin.begin()+root_num);
+    string vinright(vin.begin()+root_num+1,vin.end());
+    res=pos(preleft,vinleft)+pos(preright,vinright)+temp;
+    if(res.size()==pre.size())return res;
+    
+}
+
+int main(){
+    string pre,vin;
+    cin>>pre>>vin;
+    cout<<pos(pre,vin);
+    return 0;
+}
